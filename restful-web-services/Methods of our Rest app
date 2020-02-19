@@ -1,0 +1,30 @@
+This Webservice will:
+
+Social Media Application
+
+User -> Posts
+
+
+Retrieve all Users  - GET /users
+Create a User		- POST /users
+Retrieve one User	- Get /users/{id} -> /users/1
+Delete a User		- Delete /users/{id} -> /users/1
+
+Retrieve all posts for a User	- GET /users/{id}/posts
+Create a posts for a User		- POST /users/{id}/posts
+Create a posts for a User 		- GET /users/{id}/posts/{post_id}
+
+HAL - hypertext application language
+
+Versioning
+
+
+#Table Structure
+create table user (
+
+id integer not null,
+birth_date timestamp,
+name varchar(255),
+email varchar(255),
+primary key (id)
+)
