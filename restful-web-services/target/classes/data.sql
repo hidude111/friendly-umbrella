@@ -1,3 +1,6 @@
-insert into user values(1, sysdate(), 'Jack', 'Jack@gmail.com');
-insert into user values(2, sysdate(), 'AB', 'AB@gmail.com');
-insert into user values(3, sysdate(), 'Jill', 'Jill@gmail.com');
+insert into user values(10001, sysdate(), 'Jack@gmail.com', 'Jack');
+insert into user values(10002, sysdate(), 'AB@gmail.com', 'AB');
+insert into user values(10003, sysdate(), 'Jill@gmail.com', 'Jill');
+
+insert into post values(11001, 'My first post', 10001);
+insert into post values(11002, 'My second post', 10001);
