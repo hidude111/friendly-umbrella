@@ -34,8 +34,10 @@ public class User {
 	
 	@Past()
 	@ApiModelProperty(notes = "Birthdate cannot be in the future")
+	@JsonIgnore
 	private Date birthDate;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
 	

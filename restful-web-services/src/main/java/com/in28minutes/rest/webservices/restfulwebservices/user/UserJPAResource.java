@@ -16,9 +16,15 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -143,7 +149,35 @@ public class UserJPAResource {
 		
 		
 	}
+/*	
+	@PutMapping("/jpa/users/{id}")
+	public ResponseEntity<Object> updateUserName(@Valid @PathVariable Integer id, User partialUpdate, @RequestParam String name){
+		
+		Optional<User> userOptional = userRepository.findById(id);
+		partialUpdate = userOptional.get();
+		partialUpdate.setName(name);
+		userRepository.save(partialUpdate);
+		
+		return ResponseEntity.ok("User name has been updated.");
+		
+	}
+*/
 	
-
+	@RequestMapping(value = "/jpa/users/{id}", method = RequestMethod.PUT)
+	public User updateUser(@PathVariable("id") Integer id, @Valid User updatedUser, 
+			@RequestParam String name, @RequestParam String email) {
+		Optional<User> user = userRepository.findById(id);
+		updatedUser = user.get();
+		updatedUser.setName(name);
+		updatedUser.setEmail(email);
+		userRepository.save(updatedUser);
+		
+		return updatedUser;
+		
+		
+		
+	}
+	
+	
 
 }

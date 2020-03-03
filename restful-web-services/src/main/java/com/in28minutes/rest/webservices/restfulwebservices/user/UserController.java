@@ -7,6 +7,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javax.validation.Valid;
@@ -16,10 +17,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -110,6 +113,16 @@ public class UserController {
 				.path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 		
 		return ResponseEntity.created(location).build();
+	}
+	
+	@PutMapping("/users/{id}")
+	public ResponseEntity<Object> patchUserName(@Valid @PathVariable int id, @RequestBody User partialUpdate, @RequestParam String name){
+		User user = service.findOne(id);
+		user.setName(name);
+		service.save(user);	
+		return ResponseEntity.ok("User name has been updated.");
+		
+
 	}
 	
 
